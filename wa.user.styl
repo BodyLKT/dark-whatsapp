@@ -22,8 +22,8 @@
 @var checkbox chat_b_c   'Enable blurred contacts' 0
 @var checkbox chat_b_img 'Enable blurred images/videos' 0
 
-@var select   app_l_hdr  'Left pane header height' {
-    'Original                    ': 'original      ',
+@var select   app_hdr_h  'Panes header\'s height' {
+    'Default                     ': 'default       ',
     'Minimal                    *': 'minimal       ',
 }
 
@@ -1050,9 +1050,9 @@
             c: 0 0 hl;
             > header {
                 c: 0 0 bd;
-                if ( app_l_hdr == 'minimal' ) {
-                    height: unset;
-                    c: 0 0 hl;
+                if ( app_hdr_h == 'minimal' ) {
+                    c: 0 0 hl;    
+                    height: unset;  
                 }
                 min-height: unset i;
                 border-bottom: 1px solid bd;
@@ -1274,8 +1274,11 @@
         }
         /// Media/Links/Docs -> Content.
         [data-active-tab] {
-            border-bottom: 1px solid bd;
-            c: 0 0 bg;
+            c: 0 0 bd;
+            if (app_hdr_h == 'minimal') { 
+                c: 0 0 bg;
+                border-bottom: 1px solid bd;
+            }
             button:not(.Y1iVg) {
                 c: cm;
                 &:hover { c: 0 0 hl }
@@ -1283,7 +1286,7 @@
             }
             /// Selected.
             &::before {
-                margin-bottom: -1px;
+                if(app_hdr_h == 'minimal') { margin-bottom: -1px }
                 height: 1px;
                 c: 0 0 blue;
             }
